@@ -1,24 +1,50 @@
-import React from "react";
+import React, {useState} from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
+	const [input, setInput] = useState("")
+	const [task, setTask] = useState([])
+
+
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="container-fluid">
+			<h1>My To-do List</h1>
+			<table className="table table-hover">
+				<thead>
+				<tr>
+				<th colSpan="2">
+				<input
+					type="text"
+					placeholder="What badassery are we up to today?"
+					value={input}
+					onChange={(e) => setInput(e.target.value)}
+					onKeyUp={(e) => {
+						if (e.key === "Enter") {
+							setTask(task.concat([input]));
+							setInput("");
+						}}}/>
+				</th>
+				</tr>
+				</thead>
+				<tbody>
+					{task.map((t, index) => (
+						<tr>
+							<td>{t}{""}</td>
+							<td style={{textAlign: "right"}}>
+								<i class="fa fa-times" aria-hidden="true"
+								onClick={() => setTask(
+									task.filter((t, indexNum) => {index != indexNum}
+								))}
+								></i>
+							</td>
+						</tr>
+					))}
+					<tr>
+						<td scope="row" colSpan="2" className="tasksLeft">
+							{task.length === 1? `${task.length} task left` : `${task.length} tasks left`}
+						</td> 
+					</tr>
+				</tbody>
+			</table>	
 		</div>
 	);
 };
