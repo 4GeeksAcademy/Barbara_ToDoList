@@ -32,14 +32,14 @@ const Home = () => {
 							<td style={{textAlign: "right"}}>
 								<i class="fa fa-times" aria-hidden="true"
 								onClick={() => setTask(
-									task.filter((t, indexNum) => {index != indexNum}
+									task.filter((t, indexNum) => index != indexNum
 								))}
 								></i>
 							</td>
 						</tr>
 					))}
 					<tr>
-						<td scope="row" colSpan="2" className="tasksLeft">
+						<td scope="row" className="tasksLeft">
 							{task.length === 1? `${task.length} task left` : `${task.length} tasks left`}
 						</td> 
 					</tr>
